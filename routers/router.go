@@ -1,6 +1,6 @@
 // @APIVersion 1.0.0
-// @Title beego Test API
-// @Description beego has a very cool tools to autogenerate documents for your API
+// @Title web Test API
+// @Description web has a very cool tools to autogenerate documents for your API
 // @Contact astaxie@gmail.com
 // @TermsOfServiceUrl http://beego.me/
 // @License Apache 2.0
@@ -8,23 +8,24 @@
 package routers
 
 import (
-	"blablastar/controllers"
+	"blablastar/controllers/postcontroller"
+	"blablastar/controllers/starcontroller"
 
-	beego "github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego/v2/server/web"
 )
 
 func init() {
-	ns := beego.NewNamespace("/v1",
-		beego.NSNamespace("/object",
-			beego.NSInclude(
-				&controllers.ObjectController{},
+	ns := web.NewNamespace("/v1",
+		web.NSNamespace("/star",
+			web.NSInclude(
+				&starcontroller.StarController{},
 			),
 		),
-		beego.NSNamespace("/user",
-			beego.NSInclude(
-				&controllers.UserController{},
+		web.NSNamespace("/post",
+			web.NSInclude(
+				&postcontroller.PostController{},
 			),
 		),
 	)
-	beego.AddNamespace(ns)
+	web.AddNamespace(ns)
 }

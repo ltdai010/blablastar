@@ -1,0 +1,560 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "web Test API",
+        "description": "web has a very cool tools to autogenerate documents for your API",
+        "version": "1.0.0",
+        "termsOfService": "http://beego.me/",
+        "contact": {
+            "email": "astaxie@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/v1",
+    "paths": {
+        "/post/": {
+            "get": {
+                "tags": [
+                    "post"
+                ],
+                "description": "get page Post count from 1",
+                "operationId": "PostController.GetPage",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page_number",
+                        "description": "page number",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "page_size",
+                        "description": "page size",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/data.ResponseCommonArray"
+                        }
+                    },
+                    "403": {
+                        "description": ":list Post is empty"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "post"
+                ],
+                "description": "create Post",
+                "operationId": "PostController.Create",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The object content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data.Post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} data.ResponseCommonSingle"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/post/{post_id}": {
+            "get": {
+                "tags": [
+                    "post"
+                ],
+                "description": "find Post by Post id",
+                "operationId": "PostController.Get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "post_id",
+                        "description": "the Post_id you want to get",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/data.ResponseCommonSingle"
+                        }
+                    },
+                    "403": {
+                        "description": ":post_id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "post"
+                ],
+                "description": "update the Post",
+                "operationId": "PostController.Update",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "post_id",
+                        "description": "The Post id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data.Post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/data.ResponseBool"
+                        }
+                    },
+                    "403": {
+                        "description": ":post_id is empty"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "post"
+                ],
+                "description": "delete the object",
+                "operationId": "PostController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "post_id",
+                        "description": "The Post id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/data.ResponseBool"
+                        }
+                    },
+                    "403": {
+                        "description": "post_id is empty"
+                    }
+                }
+            }
+        },
+        "/star/": {
+            "get": {
+                "tags": [
+                    "star"
+                ],
+                "description": "get page star count from 1",
+                "operationId": "StarController.GetPage",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page_number",
+                        "description": "page number",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "page_size",
+                        "description": "page size",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/data.ResponseCommonArray"
+                        }
+                    },
+                    "403": {
+                        "description": ":list star is empty"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "star"
+                ],
+                "description": "create star",
+                "operationId": "StarController.Create",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The object content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data.Star"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} data.ResponseCommonSingle"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/star/{star_id}": {
+            "get": {
+                "tags": [
+                    "star"
+                ],
+                "description": "find Star by star id",
+                "operationId": "StarController.Get",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "star_id",
+                        "description": "the star_id you want to get",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/data.ResponseCommonSingle"
+                        }
+                    },
+                    "403": {
+                        "description": ":star_id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "star"
+                ],
+                "description": "update the star",
+                "operationId": "StarController.Update",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "star_id",
+                        "description": "The star id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data.Star"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/data.ResponseBool"
+                        }
+                    },
+                    "403": {
+                        "description": ":star_id is empty"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "star"
+                ],
+                "description": "delete the object",
+                "operationId": "StarController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "star_id",
+                        "description": "The star id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/data.ResponseBool"
+                        }
+                    },
+                    "403": {
+                        "description": "star_id is empty"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "362.0xc0003da540.false": {
+            "title": "false",
+            "type": "object"
+        },
+        "454.0xc0003da5d0.false": {
+            "title": "false",
+            "type": "object"
+        },
+        "data.Err": {
+            "title": "Err",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "data.PersonalInfo": {
+            "title": "PersonalInfo",
+            "type": "object",
+            "properties": {
+                "birth_place": {
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "height": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "kids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "weight": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "wife_or_hus_band": {
+                    "type": "string"
+                }
+            }
+        },
+        "data.Post": {
+            "title": "Post",
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "created_time": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "image_link": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "owner_id": {
+                    "type": "string"
+                },
+                "post_type": {
+                    "$ref": "#/definitions/data.PostType"
+                },
+                "sound_link": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "star_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updated_time": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "video_link": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "data.PostType": {
+            "title": "PostType",
+            "type": "string"
+        },
+        "data.ResponseBool": {
+            "title": "ResponseBool",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "data.ResponseCommonArray": {
+            "title": "ResponseCommonArray",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "$ref": "#/definitions/454.0xc0003da5d0.false"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "total_count": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "data.ResponseCommonSingle": {
+            "title": "ResponseCommonSingle",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "data": {
+                    "$ref": "#/definitions/362.0xc0003da540.false"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "data.Star": {
+            "title": "Star",
+            "type": "object",
+            "properties": {
+                "about": {
+                    "type": "string"
+                },
+                "alias": {
+                    "type": "string"
+                },
+                "birth_place": {
+                    "type": "string"
+                },
+                "date_of_birth": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "facebook_link": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "kids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "spotify_link": {
+                    "type": "string"
+                },
+                "twitter_link": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                },
+                "weight": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "wife_or_hus_band": {
+                    "type": "string"
+                },
+                "youtube_link": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "star",
+            "description": "Operations about Star\n"
+        },
+        {
+            "name": "post",
+            "description": "Operations about Users\n"
+        }
+    ]
+}

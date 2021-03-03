@@ -1,10 +1,11 @@
 package drivers
 
 import (
+	"blablastar/utils/logger"
 	"cloud.google.com/go/firestore"
 	firebase "firebase.google.com/go"
 	"github.com/algolia/algoliasearch-client-go/v3/algolia/search"
-	"github.com/astaxie/beego"
+	"github.com/beego/beego/v2/server/web"
 	"google.golang.org/api/option"
 	"context"
 	"log"
@@ -44,12 +45,17 @@ func onceInitEverything() {
 			SearchPostIndex:    searchPostIndex,
 			SearchStarIndex:    searchStarIndex,
 		}
+		logger.Info("[Finish init] Finish initial service")
 	})
 }
 
 func initCloudStore() {
 	ctx = context.Background()
-	sa := option.WithCredentialsFile(beego.AppConfig.String("cloudstore::key_path"))
+	s, err := web.AppConfig.String("cloudstore::key_path")
+	if err != nil {
+		log.Panic(err)
+	}
+	sa := option.WithCredentialsFile(s)
 	app, err := firebase.NewApp(ctx, nil, sa)
 	if err != nil {
 		log.Panic(err)
@@ -61,8 +67,23 @@ func initCloudStore() {
 }
 
 func initSearch() {
-	clientSearch = search.NewClient(beego.AppConfig.String("algolia::app_id"),
-		beego.AppConfig.String("algolia::key"))
-	searchPostIndex = clientSearch.InitIndex("algolia::post_index_name")
-	searchStarIndex = clientSearch.InitIndex("algolia::star_index_name")
+	appID, err := web.AppConfig.String("algolia::app_id")
+	if err != nil {
+		log.Panic(err)
+	}
+	key, err := web.AppConfig.String("algolia::key")
+	if err != nil {
+		log.Panic(err)
+	}
+	clientSearch = search.NewClient(appID, key)
+	postIndexName, err := web.AppConfig.String("algolia::post_index_name")
+	if err != nil {
+		log.Panic(err)
+	}
+	starIndexName, err := web.AppConfig.String("algolia::star_index_name")
+	if err != nil {
+		log.Panic(err)
+	}
+	searchPostIndex = clientSearch.InitIndex(postIndexName)
+	searchStarIndex = clientSearch.InitIndex(starIndexName)
 }
